@@ -14,7 +14,9 @@ public class Persona
     private int pesoPersona;
     private int alturaPersona;
     private int edad;
-    
+    private int caloriasTotales;
+    private int maxCalorias;
+
     /**
      * Constructor
      */
@@ -27,18 +29,27 @@ public class Persona
         this.edad = edad;
     }
 
-    public int getCaloriasIngeridas(){
-        return 1;
+    public int getCaloriasIngeridas(){        
+        return caloriasTotales;
     }
-    
-    public Comida comer(Comida comida){
-        return comida;
+
+    public int comer(Comida comida){
+        int maxCalorias = (10 * pesoPersona) + (6 * alturaPersona) + (5 * edad) - 161;
+        if(hombre){
+            maxCalorias = (10 * pesoPersona) + (6 * alturaPersona) + (5 * edad) + 5;
+        }
+        int caloriasEstaComida = -1;
+        if (getCaloriasIngeridas() <= maxCalorias){
+            caloriasEstaComida = comida.getCalorias();
+            caloriasTotales += comida.getCalorias();
+        }
+        return caloriasEstaComida;
     }
-    
+
     public String contestar(String texto){
         return texto;
     }
-    
+
     public String getAlimentoMasCaloricoConsumido(){
         return "";
     }

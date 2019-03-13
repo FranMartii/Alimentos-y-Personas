@@ -21,5 +21,8 @@ public class Comida
         this.calorias = calorias;
     }
 
+    public int getCalorias(){
+        return calorias;
+    }
     
 }
