@@ -34,23 +34,38 @@ public class Persona
     }
 
     public int comer(Comida comida){
-        int maxCalorias = (10 * pesoPersona) + (6 * alturaPersona) + (5 * edad) - 161;
-        if(hombre){
-            maxCalorias = (10 * pesoPersona) + (6 * alturaPersona) + (5 * edad) + 5;
-        }
         int caloriasEstaComida = -1;
-        if (getCaloriasIngeridas() <= maxCalorias){
+        if (getCaloriasIngeridas() <= getCaloriasTotales()){
             caloriasEstaComida = comida.getCalorias();
             caloriasTotales += comida.getCalorias();
         }
         return caloriasEstaComida;
     }
 
-    public String contestar(String texto){
-        return texto;
+    public String contestar(String pregunta){
+        System.out.println(pregunta);
+        String respuesta = "NO";
+        if(getCaloriasIngeridas() <= getCaloriasTotales() && !pregunta.contains(nombre)){
+            if(pregunta.length() % 3 == 0){
+                respuesta = "SI";
+            }
+        }
+        if(getCaloriasIngeridas() > getCaloriasTotales() || pregunta.contains(nombre)){
+            respuesta = pregunta.toUpperCase();
+        }
+        System.out.println(respuesta);
+        return respuesta;        
     }
 
     public String getAlimentoMasCaloricoConsumido(){
         return "";
+    }
+    
+    public int getCaloriasTotales(){
+        int maxCalorias = (10 * pesoPersona) + (6 * alturaPersona) + (5 * edad) - 161;
+        if(hombre){
+            maxCalorias = (10 * pesoPersona) + (6 * alturaPersona) + (5 * edad) + 5;
+        }
+        return maxCalorias;
     }
 }
